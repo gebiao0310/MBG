@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE generatorConfiguration PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN" "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+
+<!-- MyBatis 自动生成sql代码  -->
+<generatorConfiguration>
+	<!-- 导入jar包(路径) -->
+	<classPathEntry location="E:\CourseWare\MYSQL\mysql-connector-java-5.1.26-bin.jar" />
+	
+	<!-- 设置生成代码的规则 targetRuntime 开发环境使用Mybatis3的版本 -->
+	<context id="DB2Tables" targetRuntime="MyBatis3">
+		<plugin type="org.mybatis.generator.plugins.RowBoundsPlugin"></plugin>
+		
+		<commentGenerator>
+			<!-- 这个元素用来去除指定生成的注释中是否包含生成的日期 false:表示保护 -->
+            <!-- 如果生成日期，会造成即使修改一个字段，整个实体类所有属性都会发生变化，不利于版本控制，所以设置为true -->
+            <property name="suppressDate" value="true" />
+            <!-- 是否去除自动生成的注释 true：是 ： false:否 -->
+            <property name="suppressAllComments" value="false" />
+		</commentGenerator>
+		
+		<!-- 连接数据库的四要素 -->
+		<jdbcConnection 
+			driverClass="com.mysql.jdbc.Driver"
+			connectionURL="jdbc:mysql://localhost:3306/user" 
+			userId="root"
+			password="root">
+		</jdbcConnection>
+		
+		<!-- 该属性用于指定MyBatis生成器是否应该强制使用java.math。小数点和数字域的BigDecimal -->   
+		<javaTypeResolver>
+			<property name="forceBigDecimals" value="false" />
+		</javaTypeResolver>
+		
+		<!-- 定义实体类 bean -->
+		<javaModelGenerator targetPackage="en.et.entity" targetProject="src/main/java">
+			<property name="enableSubPackages" value="true" />
+			<property name="trimStrings" value="true" />
+		</javaModelGenerator>
+		
+		<!-- 接口映射的注解 或者xml文件路径 -->
+		<sqlMapGenerator targetPackage="cn.et.resource" targetProject="src/main/java">
+			<property name="enableSubPackages" value="true" />
+		</sqlMapGenerator>
+		
+		<!-- 生成的接口所在的位置 type="xml 或者 注解" -->
+		<javaClientGenerator type="ANNOTATEDMAPPER"
+			targetPackage="en.et.dao" targetProject="src/main/java">
+			<property name="enableSubPackages" value="true" />
+		</javaClientGenerator>
+		
+		<!-- 告诉mbg 需要生成代码的数据库的表 -->
+		<table tableName="emp"></table>
+		
+	</context>
+</generatorConfiguration>
